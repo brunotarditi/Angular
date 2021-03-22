@@ -1,0 +1,177 @@
+<!-- Botones -->
+<section id="actions" class="py-4 mb-4 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <a
+          href="#"
+          class="btn btn-primary btn-block"
+          data-toggle="modal"
+          data-target="#agregarProductoModal"
+        >
+          <i class="fas fa-plus"></i> Agregar producto
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Listado de productos -->
+<section id="productos">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="card-header">
+          <h4>Listado de productos</h4>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let producto of productos; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.cantidad }}</td>
+                <td>{{ producto.precio | currency: "AR":"$" }}</td>
+                <td>
+                  {{ producto.cantidad * producto.precio | currency: "AR":"$" }}
+                </td>
+                <td>
+                  <a
+                    routerLink="/product/edit/{{ producto.id }}"
+                    class="btn btn-secondary"
+                  >
+                    <i class="fas fa-angle-double-right"></i> Editar
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tarjetas laterales -->
+      <div class="col-md-3">
+        <div class="card text-center bg-danger text-white mb-3">
+          <div class="card-body">
+            <h3>Saldo Total</h3>
+            <h4 class="display-4">
+              {{ getSaldoTotal() | currency: "AR":"$" }}
+            </h4>
+          </div>
+        </div>
+        <div class="card text-center bg-success text-white mb-3">
+          <div class="card-body">
+            <h3>Total Items</h3>
+            <h4 class="display-4">
+              <i class="fas fa-arrow-alt-circle-up"></i> {{ productos?.length }}
+            </h4>
+          </div>
+        </div>
+      </div>
+      <!-- Fin de tarjetas -->
+    </div>
+  </div>
+</section>
+
+<!-- Agregar producto modal -->
+<div class="modal fade" id="agregarProductoModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title">Agregar producto</h5>
+        <button class="close" data-dismiss="modal" #botonCerrar>
+          <span>&times;</span>
+        </button>
+      </div>
+
+      <flash-messages></flash-messages>
+
+      <form #f="ngForm" (ngSubmit)="agregar(f)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input
+              type="text"
+              name="nombre"
+              class="form-control"
+              #nombre="ngModel"
+              [(ngModel)]="producto.nombre"
+              [ngClass]="{ 'is-invalid': nombre.errors && nombre.touched }"
+              required
+              minlength="2"
+            />
+            <div [hidden]="!nombre.errors?.required" class="invalid-feedback">
+              Nombre requerido
+            </div>
+            <div [hidden]="!nombre.errors?.minlength" class="invalid-feedback">
+              Debe contener al menos 2 caracteres
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="marca">Marca</label>
+            <input
+              type="text"
+              name="marca"
+              class="form-control"
+              #marca="ngModel"
+              [(ngModel)]="producto.marca"
+              [ngClass]="{ 'is-invalid': marca.errors && marca.touched }"
+              required
+              minlength="2"
+            />
+            <div [hidden]="!marca.errors?.required" class="invalid-feedback">
+              Marca requerida
+            </div>
+            <div [hidden]="!marca.errors?.minlength" class="invalid-feedback">
+              Debe contener al menos 2 caracteres
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cantidad">Cantidad</label>
+            <input
+              type="number"
+              name="cantidad"
+              class="form-control"
+              #cantidad="ngModel"
+              [(ngModel)]="producto.cantidad"
+              [ngClass]="{ 'is-invalid': cantidad.errors && cantidad.touched }"
+              required
+            />
+            <div [hidden]="!cantidad.errors?.required" class="invalid-feedback">
+              Cantidad requerida
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="precio">Precio</label>
+            <input
+              type="number"
+              name="precio"
+              class="form-control"
+              #precio="ngModel"
+              [(ngModel)]="producto.precio"
+              [ngClass]="{ 'is-invalid': precio.errors && precio.touched }"
+              required
+              step="any"
+            />
+            <div [hidden]="!precio.errors?.required" class="invalid-feedback">
+              Precio requerido
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
