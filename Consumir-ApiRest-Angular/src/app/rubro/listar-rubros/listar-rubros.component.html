@@ -1,0 +1,43 @@
+<div class="container col-md-6">
+  <div class="row">
+    <div class="col">
+      <div class="card-header">
+        <h4>{{ titulo }}</h4>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped text-center">
+          <thead class="thead-dark">
+            <tr>
+              <th>#</th>
+              <th>Denominación</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rubro of rubros; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ rubro.denominacion }}</td>
+              <td>
+                <div class="form-group text-center">
+                  <a
+                    routerLink="/editar-rubro/{{ rubro.id }}"
+                    class="btn btn-secondary"
+                    ><i class="fas fa-edit"></i></a
+                  >&nbsp;
+                  <a
+                    routerLink="/producto/{{ rubro.id }}"
+                    class="btn btn-info"
+                    ><i class="fas fa-info-circle"></i></a
+                  >&nbsp;
+                  <a href="#" class="btn btn-danger" (click)="delete(rubro)">
+                    <i class="fas fa-trash"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
