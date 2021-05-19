@@ -1,9 +1,4 @@
 <app-header></app-header>
-<div class="text-center" *ngIf="isLogged; else loggedOut">
-    <h2>Ya has iniciado sesión</h2>
-</div>
-
-<ng-template #loggedOut>
 <div class="container d-flex justify-content-center">
     <div class="card">
         <div class="card-header">
@@ -27,11 +22,9 @@
                     <input type="password" name="password" id="password" autocomplete="off" class="form-control" [(ngModel)]="clave" required>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-outline-success btn-block" [disabled]="!f.valid"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</button>
+                    <button class="btn btn-outline-success btn-block" [disabled]="!f.valid" type="submit"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</button>
                 </div>
             </form>
-            <div *ngIf="f.submitted" class="alert alert-danger m-3">Error en el login {{ mensajeError }}</div>
         </div>
     </div>
 </div>
-</ng-template>

@@ -15,25 +15,25 @@
       </button>
   
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item mr-sm-2">
             <a routerLink="/" class="nav-link"><i class="fas fa-home"></i> Inicio</a>
           </li>
           <li class="nav-item mr-sm-2" *ngIf="isLogged">
             <a routerLink="/rubros" class="nav-link" ><i class="fas fa-list"></i> Rubros</a>
           </li>
-          <li class="nav-item mr-sm-2">
+          <li class="nav-item mr-sm-2" *ngIf="isLogged">
             <a routerLink="/nuevo/rubro" class="nav-link" *ngIf="isAdmin"><i class="fas fa-plus"></i> Nuevo Rubro</a>
           </li>
-          <li class="nav-item mr-sm-2">
+          <li class="nav-item mr-sm-2" *ngIf="isLogged">
             <a routerLink="/nuevo/producto" class="nav-link" *ngIf="isAdmin"><i class="fas fa-plus"></i> Nuevo producto</a>
           </li>
-          <li class="nav-item mr-sm-2" *ngIf="!isLogged">
-            <a routerLink="/login" class="nav-link" ><i class="fas fa-user-check" ></i> Iniciar sesión</a>
-          </li>
-          <li class="nav-item mr-sm-2" *ngIf="isLogged" (click)="onLogOut()">
-            <a class="nav-link"><i class="fas fa-user-lock"></i> Cerrar sesión</a>
-          </li>
         </ul>
+        <form class="form-inline">
+          <button class="btn btn-outline-success my-2 my-sm-0" *ngIf="!isLogged" routerLink="/login"><i class="fas fa-user-check" ></i> Iniciar sesión
+          </button>
+          <button class="btn btn-outline-danger my-2 my-sm-0" style="cursor: pointer;" *ngIf="isLogged" (click)="onLogOut()" type="reset"><i class="fas fa-user-lock"></i> Cerrar sesión
+          </button>
+        </form>
       </div>
   </nav>

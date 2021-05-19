@@ -11,18 +11,12 @@ import { TokenService } from 'src/app/service/token.service';
 export class ListarRubrosComponent implements OnInit {
   titulo: string = 'Lista de rubros';
   rubros: Rubro[];
-  roles: string[];
   isAdmin = false;
 
   constructor(private rubroService: RubroService, private tokenService: TokenService) {}
   ngOnInit(): void {
     this.cargarRubros();
-    this.roles = this.tokenService.getAuthorities();
-    this.roles.forEach(rol => {
-      if (rol === 'ROLE_ADMIN') {
-        this.isAdmin = true;
-      }
-    })
+    this.isAdmin = this.tokenService.isAdmin();
   }
 
   delete(rubro: Rubro): void {

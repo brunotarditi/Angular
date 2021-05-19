@@ -17,6 +17,8 @@ import { LoginComponent } from './auth/login.component';
 import { RegistroComponent } from './auth/registro.component';
 import { IndexComponent } from './index/index.component';  
 import { interceptorProvider } from './interceptors/prod-interceptor.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { interceptorProvider } from './interceptors/prod-interceptor.service';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [RubroService, ProductoService, interceptorProvider],
   bootstrap: [AppComponent]
