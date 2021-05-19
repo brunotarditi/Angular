@@ -12,7 +12,11 @@ import { RubroService } from './service/rubro.service';
 import { ProductoService } from './service/producto.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditarRubroComponent } from './rubro/editar-rubro/editar-rubro.component';
-import { EditarProductoComponent } from './producto/editar-producto/editar-producto.component';  
+import { EditarProductoComponent } from './producto/editar-producto/editar-producto.component';
+import { LoginComponent } from './auth/login.component';
+import { RegistroComponent } from './auth/registro.component';
+import { IndexComponent } from './index/index.component';  
+import { interceptorProvider } from './interceptors/prod-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,9 @@ import { EditarProductoComponent } from './producto/editar-producto/editar-produ
     ListarProductoComponent,
     EditarRubroComponent,
     EditarProductoComponent,
+    LoginComponent,
+    RegistroComponent,
+    IndexComponent,
     
   ],
   imports: [
@@ -33,7 +40,7 @@ import { EditarProductoComponent } from './producto/editar-producto/editar-produ
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [RubroService, ProductoService],
+  providers: [RubroService, ProductoService, interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

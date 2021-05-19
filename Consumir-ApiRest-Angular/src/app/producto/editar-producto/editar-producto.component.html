@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="container col-md-6">
   <div class="card">
     <div class="card-header">
@@ -39,11 +40,11 @@
             </select>
           </div>
 
-          <input
+          <button
             type="submit"
-            class="btn btn-warning text-white"
-            value="Actualizar"
-          />
+            class="btn btn-warning text-white m-1"
+          >Actualizar</button>
+          <button routerLink="/producto/{{id}}" class="btn btn-primary text-white m-1">Regresar</button>
         </form>
       </div>
     </div>

@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="container col-md-8">
   <div class="row">
     <div class="col">
@@ -13,7 +14,7 @@
               <th>Denominación</th>
               <th>Precio</th>
               <th>Rubro</th>
-              <th>Acción</th>
+              <th *ngIf="isAdmin">Acción</th>
             </tr>
           </thead>
           <tbody>
@@ -23,8 +24,8 @@
               <td>{{ producto.denominacion }}</td>
               <td>{{ producto.precio }}</td>
               <td>{{ rubro.denominacion }}</td>
-              <td>
-                <div class="form-group text-center">
+              <td *ngIf="isAdmin">
+                <div class="form-group text-center" >
                   <a
                     routerLink="/editar-producto/{{ producto.id }}"
                     class="btn btn-secondary"

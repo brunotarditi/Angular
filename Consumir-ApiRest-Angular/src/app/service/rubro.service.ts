@@ -5,7 +5,7 @@ import { Rubro } from '../model/rubro.model';
 
 @Injectable()
 export class RubroService {
-  private url: string = 'http://localhost:8080/rubro';
+  private url: string = 'http://localhost:8080/rubros';
   constructor(private http: HttpClient) {}
 
   //obtener todos los rubros

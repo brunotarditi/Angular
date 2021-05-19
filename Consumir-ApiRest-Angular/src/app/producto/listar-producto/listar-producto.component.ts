@@ -4,6 +4,7 @@ import { Producto } from 'src/app/model/producto.model';
 import { Rubro } from 'src/app/model/rubro.model';
 import { ProductoService } from 'src/app/service/producto.service';
 import { RubroService } from 'src/app/service/rubro.service';
+import { TokenService } from 'src/app/service/token.service';
 
 @Component({
   selector: 'app-listar-producto',
@@ -15,16 +16,25 @@ export class ListarProductoComponent implements OnInit {
   productos: Producto[];
   rubro: Rubro;
   id: number;
+  roles: string[];
+  isAdmin = false;
   constructor(
     private productoService: ProductoService,
     private route: ActivatedRoute,
     private rubroService: RubroService,
-    private router: Router
+    private router: Router,
+    private tokenService: TokenService
   ) {}
 
   ngOnInit(): void {
     this.cargarRubro();
     this.cargarProductos();
+    this.roles = this.tokenService.getAuthorities();
+    this.roles.forEach(rol => {
+      if (rol === 'ROLE_ADMIN') {
+        this.isAdmin = true;
+      }
+    })
   }
 
   delete(producto: Producto): void {

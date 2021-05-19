@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Rubro } from 'src/app/model/rubro.model';
 import { RubroService } from 'src/app/service/rubro.service';
+import { TokenService } from 'src/app/service/token.service';
 
 @Component({
   selector: 'app-listar-rubros',
@@ -10,10 +11,18 @@ import { RubroService } from 'src/app/service/rubro.service';
 export class ListarRubrosComponent implements OnInit {
   titulo: string = 'Lista de rubros';
   rubros: Rubro[];
+  roles: string[];
+  isAdmin = false;
 
-  constructor(private rubroService: RubroService) {}
+  constructor(private rubroService: RubroService, private tokenService: TokenService) {}
   ngOnInit(): void {
     this.cargarRubros();
+    this.roles = this.tokenService.getAuthorities();
+    this.roles.forEach(rol => {
+      if (rol === 'ROLE_ADMIN') {
+        this.isAdmin = true;
+      }
+    })
   }
 
   delete(rubro: Rubro): void {
